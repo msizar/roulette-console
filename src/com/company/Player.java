@@ -7,7 +7,7 @@ public class Player {
 	private String playerName;
 	private String outcome;
 	private double winnings;
-	private List<String> bets;
+	private String bets;
 	private double price;
 
 	public Player(String playerName) {
@@ -26,7 +26,7 @@ public class Player {
 		this.outcome = outcome;
 	}
 
-	public void setBet(List<String> bets) {
+	public void setBet(String bets) {
 		this.bets = bets;
 	}
 
@@ -38,7 +38,7 @@ public class Player {
 		return outcome;
 	}
 
-	public List<String> getBet() {
+	public String getBet() {
 		return bets;
 	}
 
