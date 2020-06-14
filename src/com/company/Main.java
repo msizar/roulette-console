@@ -9,25 +9,26 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-		List<String> player = getPlayersFromFile();
+		List<Player> players = getPlayersFromFile();
 
-		System.out.println(player);
+		System.out.println(players);
     }
 
 	/**
 	 * Read Files
 	 * @return players
 	 */
-	public static List<String> getPlayersFromFile() {
-		List<String> players = new ArrayList<>();
+	public static List<Player> getPlayersFromFile() {
+		List<Player> players = new ArrayList<>();
 
 		try {
-			File playersFile = new File("player.txt");
+			File playersFile = new File("src/players.txt");
 			Scanner myReader = new Scanner(playersFile);
 
 			while (myReader.hasNextLine()) {
 				String line = myReader.nextLine();
-				players.add(line);
+				Player player = new Player(line);
+				players.add(player);
 			}
 
 			myReader.close();
