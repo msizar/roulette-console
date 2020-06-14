@@ -1,13 +1,16 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
 
 	private final List<Player> players;
+	private List<Bet> bets;
 
 	public Game(List<Player> players) {
 		this.players = players;
+		bets = new ArrayList<>();
 	}
 
 	/**
@@ -23,29 +26,55 @@ public class Game {
 
 	/**
 	 * Begin setup draw
-	 * @param bet
+	 * @param betsString
 	 */
-	public void startDraw(String bet) {
-		String[] betArray = bet.split(" ");
-		boolean playerExist = false;
+	public void startDraw(List<String> betsString) {
 
 		int luckyNUmber = this.generateRandomNumber();
+		List<Bet> bets = setBets(betsString);
 
-		for (Player player: this.players) {
 
-			if(player.getPlayerName().matches(betArray[0])) {
-				playerExist = true;
-				player.setBet(betArray[1]);
-				player.setPrice(Double.parseDouble(betArray[2]));
-				player.setOutcome(computeResult(luckyNUmber, player));
-				printDrawResults(luckyNUmber,player);
+
+	}
+
+	/**
+	 * set bets object
+	 * @param betsString
+	 * @return
+	 */
+	private List<Bet> setBets(List<String> betsString) {
+		List<Bet> bets = new ArrayList<>();
+
+		for(String betString: betsString) {
+			String[] betArray = betString.split(" ");
+			Player betPlayer = getPlayer(betArray[0]);
+
+			if(betPlayer != null) {
+				Bet bet = new Bet(betPlayer, Double.parseDouble(betArray[2]),betArray[1]);
+				bets.add(bet);
+			} else {
+				System.out.println(betArray[0] + " Player not found");
 			}
 		}
 
-		if(!playerExist) {
-			System.out.println("Player not found");
-			return;
+		return bets;
+	}
+
+	/**
+	 * get player by bets
+	 * @param name
+	 * @return
+	 */
+	private Player getPlayer(String name){
+		Player foundPLayer = null;
+
+		for (Player player: this.players) {
+			String temp = player.getPlayerName().toLowerCase();
+				if(temp.matches(name.toLowerCase()))
+					foundPLayer = player;
 		}
+
+		return foundPLayer;
 	}
 
 	/**

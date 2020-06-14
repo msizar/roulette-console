@@ -2,29 +2,53 @@ package com.company;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
 
     	List<Player> players = getPlayersFromFile();
+    	List<String> betsString = new ArrayList<>();
 		Game game = null;
-
 		Scanner sc = new Scanner(System.in);
+		Timer timer = new Timer();
+		final boolean[] betIsOpen = {true};
+
+		TimerTask task = new TimerTask() {
+
+			@Override
+			public void run() {
+
+				betIsOpen[0] = false;
+				sc.close();
+				timer.cancel();
+				System.out.println("time up....");
+
+
+			}
+		};
+
+		timer.schedule(task, 5000);
+
 
 		if(!players.isEmpty()){
 			game = new Game(players);
 
-			System.out.println("Enter bet [name] [bets] [price]");
-			String bet = sc.nextLine();
+			while (betIsOpen[0]) {
+				System.out.println("Enter bet [name] [bets] [price]");
+				String bet = sc.nextLine();
+				betsString.add(bet);
+			}
 
-			if(!bet.isBlank()) {
-				game.startDraw(bet);
-			} else {
-				System.err.println("Empty bet not allowed");
+			//check if betting time is open
+			if(!betIsOpen[0]) {
+
+				if(!betsString.isEmpty()) {
+					game.startDraw(betsString);
+				} else {
+					System.err.println("Empty bets not allowed");
+				}
 			}
 
 		} else {
