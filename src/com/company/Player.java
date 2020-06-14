@@ -4,6 +4,7 @@ public class Player {
 
 	private String playerName;
 	private String outcome;
+	private Double winnings;
 	private int bet;
 
 	public Player(String playerName) {
@@ -32,5 +33,13 @@ public class Player {
 
 	public void setBet(int bet) {
 		this.bet = bet;
+	}
+
+	public Double getWinnings() {
+		return winnings;
+	}
+
+	public void setWinnings(Double winnings) {
+		this.winnings = winnings;
 	}
 }
