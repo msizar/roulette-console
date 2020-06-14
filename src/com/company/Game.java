@@ -17,8 +17,8 @@ public class Game {
 	private int generateRandomNumber() {
 		int min = 0;
 		int max = 36;
-		int random = (int)(Math.random() * max + min+1);
-		return random;
+
+		return (int)(Math.random() * max + min+1);
 	}
 
 	/**
@@ -57,25 +57,29 @@ public class Game {
 	private String computeResult(int luckyNumber,Player player) {
 		String pBet = player.getBet();
 		String results = "LOSE";
+		double winnings = 0;
 
-		System.out.println("Win number..... "+ luckyNumber);
 		if(isNumeric(pBet)) {
 			if( Integer.parseInt(pBet) == luckyNumber){
 				results = "WIN";
+				winnings = 36;
 			}
 
 		}else {
 
 			if(pBet.toUpperCase().matches("EVEN") && luckyNumber % 2 == 0)  {
 				results = "WIN";
+				winnings = 2;
 			}
 
 			if(pBet.toUpperCase().matches("ODD") && luckyNumber % 2 != 0)  {
 				results = "WIN";
+				winnings = 2;
 			}
 
 		}
 
+		player.setWinnings(player.getPrice() * winnings);
 
 		return results;
 	}
@@ -86,13 +90,13 @@ public class Game {
 	 * @param player
 	 */
 	private void printDrawResults(int luckyNumber,Player player) {
-
+		String spacer = "    ";
 		System.out.println("Results:"+ luckyNumber);
 		System.out.println("Player     Bet     Outcome     Winning\n___\n");
 		System.out.println(player.getPlayerName()+"   "+
-				player.getBet()+"   "+
-				player.getPrice()+ "   "+
-				player.getOutcome());
+				player.getBet()+spacer+
+				player.getPrice()+spacer+
+				player.getOutcome()+ spacer+ player.getWinnings());
 	}
 
 	/**
