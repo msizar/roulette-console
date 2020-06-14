@@ -9,9 +9,28 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-		List<Player> players = getPlayersFromFile();
 
-		System.out.println(players);
+    	List<Player> players = getPlayersFromFile();
+		Game game = null;
+
+		Scanner sc = new Scanner(System.in);
+
+		if(!players.isEmpty()){
+			game = new Game(players);
+
+			System.out.println("Enter bet [name] [bets] [price]");
+			String bet = sc.nextLine();
+
+			if(!bet.isBlank()) {
+				game.startDraw(bet);
+			} else {
+				System.err.println("Empty bet not allowed");
+			}
+
+		} else {
+			System.err.println("No players found on file");
+		}
+
     }
 
 	/**
