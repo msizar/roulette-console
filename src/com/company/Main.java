@@ -9,7 +9,9 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+		List<String> player = getPlayersFromFile();
+
+		System.out.println(player);
     }
 
 	/**
