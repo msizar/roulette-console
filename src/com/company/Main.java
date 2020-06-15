@@ -28,7 +28,7 @@ public class Main {
 			}
 		};
 
-		timer.schedule(task, 10000);
+		timer.schedule(task, 30+1000);
 
 
 		if(!players.isEmpty()){
