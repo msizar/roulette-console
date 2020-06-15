@@ -5,10 +5,6 @@ import java.util.List;
 public class Player {
 
 	private String playerName;
-	private String outcome;
-	private double winnings;
-	private String bets;
-	private double price;
 
 	public Player(String playerName) {
 		this.playerName = playerName;
@@ -22,35 +18,5 @@ public class Player {
 		this.playerName = playerName;
 	}
 
-	public void setOutcome(String outcome) {
-		this.outcome = outcome;
-	}
 
-	public void setBet(String bets) {
-		this.bets = bets;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	public String getOutcome() {
-		return outcome;
-	}
-
-	public String getBet() {
-		return bets;
-	}
-
-	public Double getWinnings() {
-		return winnings;
-	}
-
-	public void setWinnings(Double winnings) {
-		this.winnings = winnings;
-	}
-
-	public double getPrice() {
-		return price;
-	}
 }

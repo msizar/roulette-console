@@ -25,11 +25,10 @@ public class Main {
 				timer.cancel();
 				System.out.println("time up....");
 
-
 			}
 		};
 
-		timer.schedule(task, 5000);
+		timer.schedule(task, 10000);
 
 
 		if(!players.isEmpty()){
