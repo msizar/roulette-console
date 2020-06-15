@@ -38,6 +38,7 @@ public class Game {
 		}
 
 		this.printDrawResults(result);
+		this.printSummary();
 
 	}
 
@@ -123,7 +124,7 @@ public class Game {
 	 */
 	private void printDrawResults(int luckyNumber) {
 		String spacer = "       ";
-		System.out.println("Results:"+ luckyNumber);
+		System.out.println("\nOutput 1\nResults:"+ luckyNumber);
 		System.out.println("Player     Bet     Outcome     Winning\n___\n");
 
 		for (Bet bet : this.bets) {
@@ -152,14 +153,22 @@ public class Game {
 	 * Print all bet info
 	 */
 	public void printSummary() {
-		int result = generateRandomNumber();
+		String spacer = "       ";
+		System.out.println("\nOutput 2\nPlayer     Total Win     Total Bet     Winning\n___\n");
 
-		System.out.println("Results:"+ result);
 
-		System.out.println("Player     Bet     Outcome     Winning\n___\n");
-		for (Player player: players) {
-			System.out.println(player.getPlayerName()+"   "+player.getBet()+
-					"   "+player.getPrice());
+		for (Player player : players) {
+			for (Bet bet : this.bets) {
+
+				if(bet.getPlayer().getPlayerName().matches(player.getPlayerName())){
+					player.setTotalWin(player.getTotalWin() + bet.getWinnings());
+					player.setTotalBet(player.getTotalBet() + bet.getPrice());
+				}
+			}
+
+			System.out.println(player.getPlayerName()+spacer+player.getTotalWin()+
+					spacer+player.getTotalBet());
+
 		}
 	}
 }

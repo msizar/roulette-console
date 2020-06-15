@@ -69,9 +69,15 @@ public class Main {
 
 			while (myReader.hasNextLine()) {
 				String line = myReader.nextLine();
-				Player player = new Player(line);
+				String lineArr[] = line.split(",");
+
+				double totalWin = lineArr.length > 1 ? Double.parseDouble(lineArr[1]) : 0;
+				double totalBet = lineArr.length > 2 ? Double.parseDouble(lineArr[2]) : 0;
+
+				Player player = new Player(lineArr[0],totalBet,totalWin);
 				players.add(player);
 			}
+
 
 			myReader.close();
 		} catch (FileNotFoundException e) {
